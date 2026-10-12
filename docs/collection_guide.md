@@ -160,3 +160,4 @@ $PY scripts/validate_dataset.py $OUT
 - **종료 원인**
   - dexgen: drop이 많다. 일반 정책은 drop 379k, timeout 67k다. drop으로 끝난 episode는 마지막 2초가 잘렸고, 너무 짧아진 episode는 버렸다.
   - dexscrew: stagnation 112k, timeout 32k다. 넛을 쥔 상태라 전부 보존했다.
+- **통계와 그림:** 정책별 관절, fingertip, 물체, coverage 분포는 [dataset_stats.md](dataset_stats.md)를 본다.
