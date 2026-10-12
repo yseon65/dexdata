@@ -81,7 +81,7 @@ keypoint 후보 17개는 다음과 같다. `schema.KEYPOINT_SETS`에 미리 정�
 
 | 규칙 | 기본값 | 이유 |
 |---|---|---|
-| episode 첫 행 제외 | `skip_first_steps=1` | reset 직후에는 link pose가 다음 physics step 전까지 갱신되지 않을 수 있다 |
+| episode 첫 행 제외 | `--skip_first_steps 6` (v1 수집은 1) | reset 직후에는 link pose가 다음 physics step 전까지 갱신되지 않을 수 있다. 또 reset pose가 정지 상태가 아니어서 손가락이 너트 접촉에 밀려 자리를 잡는 0.3 s 동안 관절 가속도가 정상의 약 3.7배다 (dexscrew teacher 측정, `dexscrew/scripts/measure_finger_jitter.py`의 `by_age`) |
 | `drop` / `low_contact`로 끝난 episode의 마지막 2초 제거 | 40 step | 논문 Algorithm 1의 정제 규칙 |
 | `timeout` / `stagnation` 종료 | 전부 보존 | 물체를 손에 쥔 상태라서 안전한 상태 분포에 속한다 |
 | 정제 후 8행 미만 episode | 버림 | |

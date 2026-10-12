@@ -38,6 +38,8 @@ parser.add_argument('--num_envs', type=int, default=1024)
 parser.add_argument('--target_transitions', type=float, default=1e6)
 parser.add_argument('--shard_transitions', type=float, default=2e6)
 parser.add_argument('--seed', type=int, default=0)
+parser.add_argument('--skip_first_steps', type=int, default=6,
+                    help='steps dropped at every episode start (reset settling transient, ~0.3 s)')
 parser.add_argument('--device', default='cuda:0')
 args = parser.parse_args()
 if args.checkpoint is None and not args.random_policy:
@@ -107,6 +109,7 @@ adapter = DexgenAdapter(raw_env, env, object_name=args.object_name)
 rec = EpisodeRecorder(
     args.out, args.run_name, task=task_name, policy=policy_name, num_envs=args.num_envs,
     max_episode_steps=raw_env.max_episode_length, step_dt=raw_env.step_dt, shard_transitions=args.shard_transitions,
+    skip_first_steps=args.skip_first_steps,
     run_info={'collector': 'collect_dexgen', 'env_class': args.env_class, 'env_cfg': args.env_cfg,
               'cfg_overrides': {k: repr(v) for k, v in cfg_overrides.items()}, 'checkpoint': args.checkpoint,
               'stochastic': args.stochastic, 'random_policy': args.random_policy, 'seed': args.seed,

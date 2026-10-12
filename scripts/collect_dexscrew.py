@@ -32,6 +32,8 @@ parser.add_argument('--num_envs', type=int, default=1024)
 parser.add_argument('--target_transitions', type=float, default=1e6)
 parser.add_argument('--shard_transitions', type=float, default=2e6)
 parser.add_argument('--seed', type=int, default=0)
+parser.add_argument('--skip_first_steps', type=int, default=6,
+                    help='steps dropped at every episode start (reset settling transient, ~0.3 s)')
 parser.add_argument('--headless', action='store_true', default=True)
 args, overrides = parser.parse_known_args()
 app = AppLauncher(headless=args.headless).app
@@ -109,6 +111,7 @@ step_dt = env.control_freq_inv * env.dt
 rec = EpisodeRecorder(
     args.out, args.run_name, task=task_name, policy=policy_name, num_envs=args.num_envs,
     max_episode_steps=env.max_episode_length, step_dt=step_dt, shard_transitions=args.shard_transitions,
+    skip_first_steps=args.skip_first_steps,
     run_info={'collector': 'collect_dexscrew', 'env_task': args.task, 'checkpoint': os.path.expanduser(args.ckpt),
               'policy': args.policy, 'stochastic': args.stochastic, 'env_overrides': env_overrides,
               'seed': args.seed, 'dexscrew_root': args.dexscrew_root, 'object_type': object_type})
