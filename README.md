@@ -17,6 +17,8 @@ DexGen 모델과 학습 코드는 이 폴더에 없다. 이 폴더는 데이터 
 
 **2026-10-11 기준 실제 수집 방법(사용할 정책, 필수 설정, 수집량, 시간)은 [docs/collection_guide.md](docs/collection_guide.md)를 본다.**
 
+**`data/v2`(2026-10-12)는 v1과 같은 정책과 명령으로 수집했고, episode 첫 6 step을 버렸다(`--skip_first_steps 6`). 수집 명령은 `../dexgen_model/logs/pipeline_v2.sh`에 있다.**
+
 **수집된 `data/v1`의 통계와 분포 그림은 [docs/dataset_stats.md](docs/dataset_stats.md)를 본다** (`scripts/dataset_stats.py`로 다시 만든다).
 
 ## 구조
